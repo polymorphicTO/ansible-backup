@@ -1,0 +1,6 @@
+- name: Nightly Database backup
+  template: src=nightly_backup.rb.j2
+            dest=/home/{{ backup_user }}/Backup/models/nightly_backup.rb
+            mode=0600
+            owner={{ backup_user }} group={{ backup_user }}
+  tags: backup-config

@@ -1,1 +1,1 @@
-zzet.rbenv,2.2.0
+zzet.rbenv,3.3.2

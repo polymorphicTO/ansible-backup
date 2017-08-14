@@ -22,7 +22,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision :ansible do |ansible|
-    ansible.playbook = "playbooks/add-backups.yml"
+    ansible.groups = {
+      "all" => ["utility"],
+    }
+    ansible.playbook = "add-backups.yml"
   end
 
 end

@@ -1,0 +1,11 @@
+- name: set newer version of ruby as the default for archiver
+  become_user: '{{ backup_user }}'
+  shell: /home/{{ backup_user }}/.rbenv/bin/rbenv global {{ backup_ruby_version }}
+
+- name: install backup gem
+  become_user: '{{ backup_user }}'
+  shell: /home/{{ backup_user }}/.rbenv/shims/gem install backup
+
+- name: rbenv rehash to pickup new commands
+  become_user: '{{ backup_user }}'
+  shell: /home/{{ backup_user }}/.rbenv/bin/rbenv rehash

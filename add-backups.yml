@@ -1,0 +1,17 @@
+- name: Add datbase backups to host
+  hosts: all
+  become: yes
+  vars:
+    backup_user: archiver
+    backup_ruby_version: 2.3.4
+    rbenv:
+      env: user
+      version: v1.0.0
+      default_ruby: "{{ backup_ruby_version }}"
+      rubies:
+        - version: "{{ backup_ruby_version }}"
+  roles:
+    - { role: base, tags: ['base']}
+    - { role: custom-users, tags: ['users'] }
+    - { role: zzet.rbenv, rbenv_users: [ '{{ backup_user }}' ] }
+    - { role: database-backups, tags: ['backups']}
