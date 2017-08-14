@@ -5,13 +5,11 @@
     backup_user: "archiver"
     rbenv:
       env: user
-      version: v0.4.0
-      ruby_version: 2.1.5
+      version: v1.0.0
+      default_ruby: 2.3.3
+      rubies:
+        - version: 2.3.3
   roles:
+    - { role: base, tags: ['base']}
     - { role: custom-users, tags: ['users'] }
-    - { role: zzet.rbenv,
-        rbenv_users: [ '{{ backup_user }}' ],
-        rbenv_plugins: [ name: "ruby-build",
-            repo: "https://github.com/sstephenson/ruby-build.git",
-            version: "v20151028" ]
-      }
+    - { role: zzet.rbenv, rbenv_users: [ '{{ backup_user }}' ] }
