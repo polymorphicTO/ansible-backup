@@ -1,2 +1,2 @@
-- name: install makepasswd dependency
-  apt: name=makepasswd state=latest update_cache=yes
+- include: install.yml
+- include: time.yml
