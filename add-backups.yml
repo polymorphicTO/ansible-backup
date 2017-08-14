@@ -11,6 +11,7 @@
       rubies:
         - version: "{{ backup_ruby_version }}"
   roles:
-    - { role: base, tags: ['base']}
-    - { role: custom-users, tags: ['users'] }
-    - { role: zzet.rbenv, rbenv_users: [ '{{ backup_user }}' ] }
+    # - { role: base, tags: ['base']}
+    # - { role: custom-users, tags: ['users'] }
+    # - { role: zzet.rbenv, rbenv_users: [ '{{ backup_user }}' ] }
+    - { role: database-backups, tags: ['backups']}

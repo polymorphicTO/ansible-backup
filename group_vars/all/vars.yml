@@ -1,0 +1,7 @@
+application_database_name: groot
+application_database_username: groot
+application_database_password: groot
+application_database_host: 127.0.0.1
+backup_s3_access_key_id: AKKKKKKKKKKKKK
+backup_s3_secret_access_key: OIJKKKKLrGhmas
+backup_encryption_key: some_password
