@@ -1,0 +1,32 @@
+# encoding: utf-8
+# {{ ansible_managed }}
+
+Backup::Model.new(:nightly_backup, 'Nightly database backup') do
+  split_into_chunks_of 1000
+
+  database MySQL do |db|
+    db.name               = "{{ application_database_name }}"
+    db.username           = "{{ application_database_username }}"
+    db.password           = "{{ application_database_password }}"
+    db.host               = "{{ application_database_host }}"
+  end
+
+  store_with S3 do |s3|
+    s3.access_key_id      = "{{ backup_s3_access_key_id }}"
+    s3.secret_access_key  = "{{ backup_s3_secret_access_key }}"
+    s3.keep               = 200
+    s3.region             = 'ca-central-1'
+    s3.bucket             = "{{ s3_bucket_name }}"
+    s3.path               = "/"
+  end
+
+  compress_with Gzip do |compression|
+    compression.level = 5
+  end
+
+  encrypt_with OpenSSL do |encryption|
+    encryption.password   = '{{ backup_encryption_key }}'
+    encryption.base64     = false
+    encryption.salt       = true
+  end
+end

@@ -1,0 +1,6 @@
+- name: schedule nightly offsite backup
+  become_user: '{{ backup_user }}'
+  cron: name="nightly encrypted backup"
+              minute="37" hour="3"
+              job="/bin/bash -l -c 'backup perform --trigger nightly_backup'"
+  tags: backup-cron

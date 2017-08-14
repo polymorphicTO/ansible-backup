@@ -1,0 +1,23 @@
+- name: create the Backup directory
+  file: path=/home/{{ backup_user }}/Backup/
+          state=directory
+          owner={{ backup_user }}
+          group={{ backup_user }}
+          recurse=true
+
+- name: setup the Backup config directory structure
+  file: path=/home/{{ backup_user }}/Backup/{{item}}
+          state=directory
+          owner={{ backup_user }}
+          group={{ backup_user }}
+          recurse=true
+  with_items:
+    - models
+    - log
+
+# The backup gem needs this file, even if we don't use it
+- name: Generate backup gem default config
+  become_user: '{{ backup_user }}'
+  shell: /home/{{ backup_user }}/.rbenv/shims/backup generate:config
+  args:
+    chdir: /home/{{ backup_user }}/
